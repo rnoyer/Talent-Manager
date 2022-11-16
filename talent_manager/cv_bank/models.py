@@ -4,8 +4,14 @@ from django.db import models
 class Roles(models.Model):
     role = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.role
+
 class Skills(models.Model):
     skill = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.skill
 
 class Collabs(models.Model):
     first_name = models.CharField(max_length=50)
@@ -23,3 +29,6 @@ class Collabs(models.Model):
     # Certifications (many)
     # Langues parlés (many)
     # Expériences précédentes (many)
+
+    def __str__(self):
+        return self.last_name
