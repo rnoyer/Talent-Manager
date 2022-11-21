@@ -4,11 +4,17 @@ from django.db import models
 class Roles(models.Model):
     role = models.CharField(max_length=50)
 
+    class Meta:
+        verbose_name_plural = ("Roles")
+
     def __str__(self):
         return self.role
 
 class Skills(models.Model):
     skill = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = ("Skills")
 
     def __str__(self):
         return self.skill
@@ -30,5 +36,15 @@ class Collabs(models.Model):
     # Langues parlés (many)
     # Expériences précédentes (many)
 
+    class Meta:
+        verbose_name_plural = ("Collabs")
+
     def __str__(self):
-        return self.last_name
+        collab = f"{self.last_name.upper()} {self.first_name.capitalize()}"
+        return collab
+
+    def get_roles(self):
+        return " / ".join([r.role.capitalize() for r in self.roles.all()])
+
+    def get_skills(self):
+        return " / ".join([s.skill.capitalize() for s in self.skills.all()])
